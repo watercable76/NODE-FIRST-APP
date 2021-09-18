@@ -1,0 +1,29 @@
+.product-item {
+    width: 20rem;
+    max-width: 95%;
+}
+
+.product__title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.product__price {
+    text-align: center;
+    color: #4d4d4d;
+    margin-bottom: 0.5rem;
+}
+
+.product__description {
+    text-align: center;
+}
+
+.card {
+    background-color: aliceblue;
+    border: 2px solid #929292;
+    border-radius: 6px;
+    /* width: fit-content; */
+
+    margin: 20px 8px;
+    padding: 8px;
+}
