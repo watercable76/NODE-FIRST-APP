@@ -24,4 +24,4 @@ app.use((req, res, next) => {
     res.status(404).render('404', {pageTitle: 'Error Page', path: ''});
 });
 
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
