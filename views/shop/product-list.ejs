@@ -14,20 +14,18 @@
                                         <%= product.title %>
                                     </h1>
                                     <div class="card__image">
-                                        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBook&psig=AOvVaw2u7XJl5GfOzimb09hkTrDD&ust=1632068006952000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJj7yaP1iPMCFQAAAAAdAAAAABAJ"
-                                            alt=" A book">
+                                        <img src="<%= product.imageUrl %>" alt="<%= product.imageUrl %>">
                                     </div>
                                     <div class="card__content">
                                         <h2 class="product__price">$<%= product.price %>
                                         </h2>
                                         <p class="product__description">
-                                            <%= product.desc %>
+                                            <%= product.description %>
                                         </p>
                                     </div>
                                     <div class="card__actions">
-                                        <form action="/add-to-cart" method="POST">
-                                            <button class="btn">Add to Cart</button>
-                                        </form>
+                                        <a href="/products/<%= product.id %>" class="btn">Details</a>
+                                        <%- include('../includes/add-to-cart.ejs', { product: product }) %>
                                     </div>
                                 </header>
                             </article>

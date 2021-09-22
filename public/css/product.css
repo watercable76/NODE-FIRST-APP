@@ -1,6 +1,14 @@
+.product-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+    display: block;
+}
+
 .product-item {
     width: 20rem;
     max-width: 95%;
+    margin: 1rem;
 }
 
 .product__title {
@@ -16,18 +24,4 @@
 
 .product__description {
     text-align: center;
-}
-
-.card {
-    background-color: aliceblue;
-    border: 2px solid #929292;
-    border-radius: 6px;
-    /* width: fit-content; */
-
-    margin: 20px 8px;
-    padding: 8px;
-}
-
-.card__image img {
-    width: 100%;
 }

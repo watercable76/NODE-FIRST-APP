@@ -1,8 +1,1 @@
-[
-    {
-        "title": "New stuff",
-        "imageUrl": "https://i.stack.imgur.com/Mb7hg.jpg",
-        "price": "21",
-        "desc": "radical book dude"
-    }
-]
+[{"id":"3245","title":"New stuff","imageUrl":"https://i.stack.imgur.com/Mb7hg.jpg","description":"New description","price":"210"},{"id":"0.5143010690829446","title":"Radical new prod","imageUrl":"https://i.stack.imgur.com/Mb7hg.jpg","description":"This gets a description too","price":"12.79"}]
