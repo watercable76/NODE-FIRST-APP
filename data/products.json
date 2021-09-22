@@ -1,1 +1,8 @@
-[{"title":"New stuff","price":"21","desc":"radical book dude"},{"title":"Newer book","price":"487","desc":"A really new book that is much cooler than the rest"},{"title":"Heart's desire","price":"9999","desc":"the desire of people is here"}]
+[
+    {
+        "title": "New stuff",
+        "imageUrl": "https://i.stack.imgur.com/Mb7hg.jpg",
+        "price": "21",
+        "desc": "radical book dude"
+    }
+]

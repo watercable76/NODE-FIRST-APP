@@ -1,9 +1,9 @@
-<%- include('includes/head.ejs') %> 
+<%- include('../includes/head.ejs') %> 
     <link rel="stylesheet" href="/css/product.css">
 </head>
 
 <body>
-    <%- include('includes/navigation.ejs') %> 
+    <%- include('../includes/navigation.ejs') %> 
     <main>
         <% if (prods.length> 0) { %>
             <div class="grid">
@@ -12,8 +12,7 @@
                         <header class="card__header">
                             <h1 class="product__title"><%= product.title %></h1>
                             <div class="card__image">
-                                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FBook&psig=AOvVaw2u7XJl5GfOzimb09hkTrDD&ust=1632068006952000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJj7yaP1iPMCFQAAAAAdAAAAABAJ"
-                                    alt=" A book">
+                                <img src="<%= product.imageUrl %>" alt="<%= product.imageUrl %>">
                             </div>
                             <div class="card__content">
                                 <h2 class="product__price">$<%= product.price  %></h2>
@@ -30,4 +29,4 @@
                 <h1>No Products Found</h1>
             <% } %>
     </main>
-<%- include('includes/end.ejs') %> 
+<%- include('../includes/end.ejs') %> 

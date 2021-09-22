@@ -27,3 +27,7 @@
     margin: 20px 8px;
     padding: 8px;
 }
+
+.card__image-content {
+    width: 100%;
+}
