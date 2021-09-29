@@ -1,10 +1,10 @@
-<%- include('../includes/head.ejs') %> 
-    <link rel="stylesheet" href="/css/product.css">
+<%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/product.css">
 </head>
 
 <body>
-    <%- include('../includes/navigation.ejs') %> 
+   <%- include('../includes/navigation.ejs') %>
 
     <main>
         <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>" method="POST">
@@ -24,8 +24,12 @@
                 <label for="description">Description</label>
                 <textarea name="description" id="description" rows="5"><% if (editing) { %><%= product.description %><% } %></textarea>
             </div>
-            <% if (editing) { %><input type="hidden" value="<%= product._id %>" name="productId"><% } %>
+            <% if (editing) { %>
+                <input type="hidden" value="<%= product._id %>" name="productId">
+            <% } %>
+
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Product<% } %></button>
         </form>
     </main>
-<%- include('../includes/end.ejs') %> 
+<%- include('../includes/end.ejs') %>

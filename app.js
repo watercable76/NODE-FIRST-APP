@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const csrf = require('csurf');
+const flash = require('connect-flash');
 const cors = require('cors');
 
 // import files
@@ -27,12 +29,21 @@ const store = new MongoDBStore({
     collection: 'sessions'
 });
 
+const csrfProtection = csrf();
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'my secret', resave: false, saveUninitialized: false, store: store }));
+app.use(session({ 
+    secret: 'my secret', 
+    resave: false, 
+    saveUninitialized: false, 
+    store: store 
+}));
+app.use(csrfProtection);
+app.use(flash());
 
 
 // adding features to support Heroku development
@@ -48,6 +59,7 @@ const options = {
     family: 4
 };
 
+// set session and user here
 app.use((req, res, next) => {
     if (!req.session.user) {
         return next();
@@ -60,7 +72,12 @@ app.use((req, res, next) => {
         .catch(err => console.log(err));
 });
 
-
+// set the authentication and csrf token to prevent malware and ensure credentials are met
+app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    res.locals.csrfToken = req.csrfToken();
+    next();
+});
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
@@ -73,16 +90,6 @@ mongoose
         MONGODB_URL, options
     )
     .then(result => {
-        User.findOne().then(user => {
-            if (!user) {
-                const user = new User({
-                    name: 'Nick',
-                    email: 'nik@coolio.com',
-                    cart: { items: [] }
-                });
-                user.save();
-            }
-        });
         app.listen(process.env.PORT || 3000);
     })
     .catch(err => console.log(err));
