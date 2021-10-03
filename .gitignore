@@ -4,4 +4,5 @@ node_modules
 weekly-notes
 
 # ignore login data
-# login.js
+# login.js"sendgrid.env" 
+"sendgrid.env" 
