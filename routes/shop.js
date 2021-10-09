@@ -25,4 +25,6 @@ routes.get('/orders', isAuth, shopController.getOrders);
 
 routes.post('/create-order', isAuth, shopController.postOrder);
 
+routes.get('/proj08', shopController.postProcessJson).post('/proj08', shopController.getProcessJSON);
+
 module.exports = routes;

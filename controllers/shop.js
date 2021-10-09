@@ -4,7 +4,6 @@ const Order = require('../models/order');
 exports.getProducts = (req, res, next) => {
     Product.find()
         .then(products => {
-            console.log(products);
             res.render('shop/product-list', {
                 prods: products,
                 pageTitle: 'All Products',
@@ -137,5 +136,78 @@ exports.getOrders = (req, res, next) => {
             const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
+        });
+};
+
+
+
+
+// code for team activity
+// Controller for W08
+const https = require('https');
+
+const ITEMS_PER_PAGE = 10; // Limit of 10 items per page.
+
+exports.postProcessJson = (req, res, next) => {
+    // read json
+    var url = 'https://byui-cse.github.io/cse341-course/lesson03/items.json';
+
+    https
+        .get(url, function (response) {
+            var body = '';
+
+            response.on('data', function (chunk) {
+                body += chunk;
+            });
+
+            response.on('end', function () {
+                global.jsonResponse = JSON.parse(body);
+
+                let searchedValue = req.body.searchValue || req.query.searchValue || ''; // Handle for GET, POST or neither
+                let page = req.query.page || 1; // Grab our page number, 1 if undefined
+
+                const indexStart = (page - 1) * ITEMS_PER_PAGE; // Item index to start on...
+                const indexEnd = page * ITEMS_PER_PAGE;
+
+                const filteredData = global.jsonResponse.filter((x) =>
+                    x.name.toLowerCase().includes(searchedValue.toLowerCase())
+                );
+
+                res.render('shop/proj08',
+                    {
+                        data: filteredData.slice(indexStart, indexEnd), // For JSON/Array and not Mongoose, .slice() works best.
+                        path: '/proj08',
+                        title: 'Lesson 8 Prove Assignment',
+                        searchedValue: searchedValue,
+                        page: page,
+                        numPages: Math.ceil(filteredData.length / ITEMS_PER_PAGE),
+                    });
+            });
+        })
+        .on('error', function (e) {
+            console.log('Got an error: ', e);
+        });
+};
+
+// New code for W08...
+exports.getProcessJSON = (req, res, next) => {
+    let searchedValue = req.body.searchValue || req.query.searchValue || ''; // Handle for GET, POST or neither
+    let page = req.query.page || 1; // Grab our page number, 1 if undefined
+
+    const indexStart = (page - 1) * ITEMS_PER_PAGE; // Item index to start on...
+    const indexEnd = page * ITEMS_PER_PAGE;
+
+    const filteredData = global.jsonResponse.filter((x) =>
+        x.name.toLowerCase().includes(searchedValue.toLowerCase())
+    );
+
+    res.render('shop/proj08',
+        {
+            data: filteredData.slice(indexStart, indexEnd), // For JSON/Array and not Mongoose, .slice() works best.
+            path: '/proj08',
+            title: 'Lesson 8 Prove Assignment',
+            searchedValue: searchedValue,
+            page: page,
+            numPages: Math.ceil(filteredData.length / ITEMS_PER_PAGE),
         });
 };
